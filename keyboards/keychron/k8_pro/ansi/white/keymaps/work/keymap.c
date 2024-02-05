@@ -44,7 +44,28 @@ enum kbd75_keycodes {
     DVORAK
 };
 
-// _______
+enum combos {
+  AB_ESC,
+  JK_BTN1,
+  JI_BTN2,
+  SD_LAYER,
+  COMBO_LENGTH
+};
+
+const uint16_t PROGMEM ab_combo[] = {KC_A, KC_B, COMBO_END};
+const uint16_t PROGMEM jk_combo[] = {KC_J, KC_K, COMBO_END};
+const uint16_t PROGMEM ji_combo[] = {KC_J, KC_I, COMBO_END};
+const uint16_t PROGMEM sd_combo[] = {KC_S, KC_D, COMBO_END};
+
+combo_t key_combos[] = {
+  [AB_ESC]   = COMBO(ab_combo, MO(LB_1)),
+  [JK_BTN1]  = COMBO(jk_combo, KC_BTN1),
+  [JI_BTN2]  = COMBO(ji_combo, KC_BTN2),
+  [SD_LAYER] = COMBO(sd_combo, MO(LB_1)),
+};
+
+uint16_t COMBO_LEN = COMBO_LENGTH;
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [L_MAC_BASE] = LAYOUT_ansi_87(
@@ -179,8 +200,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [FN_LAYER] = LAYOUT_ansi_87(
      _______,  KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  BL_DEC,   BL_INC,   KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,               KC_F,  _______,  _______,
-     _______,  BT_HST1,  BT_HST2,  BT_HST3,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  QK_BOOT,  _______,  _______,  _______,
-     BL_TOGG,  _______,  WIN_BASE, _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,
+     _______,  BT_HST1,  BT_HST2,  BT_HST3,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  QK_BOOT,  DM_REC1,  _______,  DM_PLY1,
+     BL_TOGG,  _______,  WIN_BASE, _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  DM_REC2,  DM_RSTP,  DM_PLY2,
      _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,            _______,
      _______,            _______,  _______,  _______,  _______,  BAT_LVL,  NK_TOGG,  MAC_BASE,   _______,  _______,  _______,            _______,            _______,
      _______,  _______,  _______,                                _______,                                _______,  _______,  _______,  _______,  _______,  _______,  _______)
